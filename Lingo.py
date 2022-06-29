@@ -33,7 +33,9 @@ class Lingo():
                 i = cur.execute("SELECT * FROM words WHERE word = ?", (line,))
 
                 if i.fetchone() is None:
-                    cur.execute("INSERT INTO words VALUES (?)", (line,))
+                    l = line.strip()
+
+                    cur.execute("INSERT INTO words VALUES (?)", (l,))
 
         sql.commit()
         cur.close()
@@ -92,7 +94,7 @@ class Lingo():
 
 
         if inp is self.woord:
-            print("WOORD GEVONDEN")
+            print("WOORD GEVONDEN 1")
             return self.win_msg()
 
         if inp != self.woord:
@@ -105,7 +107,7 @@ class Lingo():
                 else:
                     output += "_"
             # check if output contains no _
-            if "_" not in output:
+            if "_" not in output and self.woord == inp:
                 return self.win_msg()
 
             return {
@@ -117,5 +119,5 @@ class Lingo():
             }
 
         else: 
-            print("WOORD GEVONDEN")
+            print("WOORD GEVONDEN 2")
             return self.win_msg()
